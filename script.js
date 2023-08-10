@@ -29,8 +29,8 @@ return {user, pass};
 // suma el costo de productos si fue validada la clave anterior
 function sumaCostoProductos (){
     if(login.user === finalUser && login.pass === finalPass){
-        alert('Esta aplicacion permite sumar el costo de todos los productos que se agreguen, por compras superiores $15000 se aplican hasta un 40% de descuento')
-        let numero = parseInt(prompt("ingrese el valor del producto"))
+        alert('Esta aplicacion permite sumar el costo de todos los productos que se agreguen, por compras superiores $15000 se aplica hasta un 40% de descuento')
+        let numero = parseInt(prompt("ingrese el valor del producto, ejemplo 10000"))
         let carrito = 0
 
         while(!isNaN(numero)){
@@ -38,7 +38,7 @@ function sumaCostoProductos (){
             numero = parseInt(prompt("ingrese otro producto, o una F para finalizar "))
             
         }
-    alert ('precio final: ' + "$" + carrito)
+    alert ('precio sin descuento: ' + "$" + carrito)
     return carrito
         
         
