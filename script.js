@@ -27,18 +27,19 @@ return {user, pass};
 }
 
 // suma el costo de productos si fue validada la clave anterior
-function sumaCostoProductos (){
-    if(login.user === finalUser && login.pass === finalPass){
+function sumaCostoProductos (user, pass){
+    if(user === finalUser && pass === finalPass){
         alert('Esta aplicacion permite sumar el costo de todos los productos que se agreguen, por compras superiores $15000 se aplica hasta un 40% de descuento')
-        let numero = parseInt(prompt("ingrese el valor del producto, ejemplo 10000"))
+        let numero = parseFloat(prompt("ingrese el valor del producto, ejemplo 10000"))
         let carrito = 0
 
         while(!isNaN(numero)){
             carrito+= numero
-            numero = parseInt(prompt("ingrese otro producto, o una F para finalizar "))
+            numero = parseFloat(prompt("ingrese otro producto, o una F para finalizar "))
+            alert('total: ' + '$' + carrito)
             
         }
-    alert ('precio sin descuento: ' + "$" + carrito)
+   
     return carrito
         
         
@@ -49,27 +50,37 @@ function sumaCostoProductos (){
     }
 
 }
+// funcion para calculo de descuento
+function descuento (monto, descuento ){
+    montoDescuento = monto / 100 * descuento
+    montoFinal = monto - montoDescuento
+    alert("Se aplicó un " + descuento + "%" + " de descuento")
+    return montoFinal
+}
+
+
+
 
 function aplicarDescuento(){
     if(login.user === finalUser && login.pass === finalPass){
         if (total >= 100_000) {
-            let montoConDescuento = total * 0.6 
-            alert ('¡se aplicó un 40% de descuento!')
+            //llama a la funcion descuento
+            let montoConDescuento = descuento(total, 40)
             alert ('total a pagar : ' + '$' + montoConDescuento)
         
         } else if (total >= 50_000) {
-            let montoConDescuento = total * 0.7
-            alert ('¡se aplicó un 30% de descuento!')
+            //llama a la funcion descuento
+            let montoConDescuento = descuento(total, 30)
             alert ('total a pagar : ' + '$' + montoConDescuento)
 
         } else if (total >= 30_000) {
-            let montoConDescuento = total * 0.8
-            alert ('¡se aplicó un 20% de descuento!')
+            //llama a la funcion descuento
+            let montoConDescuento = descuento(total, 20)
             alert ('total a pagar : ' + '$' + montoConDescuento)
 
         } else if ( total >=15_000){
-                let montoConDescuento = total * 0.9
-                alert ('¡se aplicó un 10% de descuento!')
+            //llama a la funcion descuento
+            let montoConDescuento = descuento(total, 10)
                 alert ('total a pagar : ' + '$' + montoConDescuento)
         } else {
             alert('Solo se realizan descuentos sobre $15000')
@@ -81,7 +92,8 @@ function aplicarDescuento(){
 
 }
 
+//orden del proceso
 let login = loginAdm()
-let total = sumaCostoProductos()
+let total = sumaCostoProductos(login.user, login.pass)
 aplicarDescuento()
 
