@@ -1,4 +1,4 @@
-// usuario y clave de administrador
+// usuario y clave de usuario
 const finalUser = 'user'
 const finalPass = 'user1234*'
 
