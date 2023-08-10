@@ -34,9 +34,10 @@ function sumaCostoProductos (user, pass){
         let carrito = 0
 
         while(!isNaN(numero)){
-            numero = parseFloat(prompt("ingrese otro producto, o una F para finalizar "))
             carrito+= numero
             alert('total: ' + '$' + carrito)
+            numero = parseFloat(prompt("ingrese otro producto, o una F para finalizar "))
+            
             
         }
    
