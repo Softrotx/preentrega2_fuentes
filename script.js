@@ -28,26 +28,57 @@ return {user, pass};
 
 // suma el costo de productos si fue validada la clave anterior
 function sumaCostoProductos (){
-    alert('Ingrese el costo de cada producto')
+    alert('Esta aplicacion permite sumar el costo de todos los productos que se agreguen, por compras superiores $15000 se aplican hasta un 40% de descuento')
     if(login.user === finalUser && login.pass === finalPass){
         let numero = parseInt(prompt("ingrese el valor del producto"))
         let carrito = 0
+
         while(!isNaN(numero)){
             carrito+= numero
             numero = parseInt(prompt("ingrese otro producto, o una F para finalizar "))
             
         }
         alert ('precio final: ' + "$" + carrito)
-        alert ('Gracias por su compra')
+        
         
     }else{
         alert('acceso denegado')
         
+        
     }
-alert('cerrando aplicacion')
+return carrito
 }
 
+function aplicarDescuento(){
+    if(login.user === finalUser && login.pass === finalPass){
+        if(30_000 > total >=15_000){
+            let montoConDescuento = total * 0.9
+            alert ('¡se aplicó un 10% de descuento!')
+            alert ('total a pagar : ' + '$' + montoConDescuento)
+        
+        } else if (50_000 > total >= 30_000) {
+            let montoConDescuento = total * 0.8
+            alert ('¡se aplicó un 20% de descuento!')
+            alert ('total a pagar : ' + '$' + montoConDescuento)
+
+        } else if (100_000 > total >= 50_000) {
+            let montoConDescuento = total * 0.7
+            alert ('¡se aplicó un 30% de descuento!')
+            alert ('total a pagar : ' + '$' + montoConDescuento)
+
+        } else if (total >= 100_000) {
+            let montoConDescuento = total * 0.6 
+            alert ('¡se aplicó un 40% de descuento!')
+            alert ('total a pagar : ' + '$' + montoConDescuento)
+        }
+    
+    alert ('cerrando aplicacion')
+    }
+
+}
 
 let login = loginAdm()
-sumaCostoProductos()
+let total = sumaCostoProductos()
+aplicarDescuento()
 
+alert('cerrando aplicacion')
