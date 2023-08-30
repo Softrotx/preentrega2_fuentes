@@ -100,7 +100,7 @@ función modificadorUsuario (user) {
 // menú
 
 function menu1() {
-
+p
     let opcion = parseInt(prompt('Bienvenido, por favor elija una opción: \n 1. registrar una cuenta \n 2. Iniciar sesión \n 3. cerrar'))
     if (opcion === 1) {
         // opcion 1 registrar cuenta
@@ -132,6 +132,7 @@ function menu2(usr) {
 
         } else if (opcion === 2) {
             // opcion 2 cambiar usuario
+            modificadorUsuario(validadopo)
 
         } else if (opcion === 3) {
 
