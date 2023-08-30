@@ -1,6 +1,6 @@
 // array de usuarios
 const usuarios = []
-let validado = false
+let validado = 0
 
 // crear un usuario y contraseña
 
@@ -25,7 +25,7 @@ function registro() {
     let pass = prompt('ingrese su contraseña')
 
     while (name === "" || user === "" || pass === "") {
-        alert('debe escribir su nombre, usuario y password, no puede quedar en blanco')
+        alert('debe escribir su nombre, usuario y password, no puede quedar ningún campo en blanco')
         name = prompt('ingrese su nombre')
         user = prompt('ingrese su usuario')
         pass = prompt('ingrese su contraseña')
@@ -83,6 +83,7 @@ function loginAdm(user, pass) {
 
             }
             alert('maximo de intentos superados')
+            return = false
 
 
 
@@ -154,7 +155,7 @@ function menu2(usr) {
 menu1()
 validado = loginAdm()
 console.log(validado)
-menu2()
+menu2(validado)
 menu1()
 
 
