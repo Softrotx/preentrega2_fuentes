@@ -92,7 +92,9 @@ function loginAdm(user, pass) {
     }
 }
 
-
+función modificadorUsuario (user) {
+    const pos = usuarios.indexof(user)
+    alert(`posicion: ${pos)`)
 
 
 // menú
