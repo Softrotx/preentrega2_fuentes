@@ -1,6 +1,6 @@
 // array de usuarios
 const usuarios = []
-let validado = 0
+let validado = false
 
 // crear un usuario y contraseña
 
@@ -25,7 +25,7 @@ function registro() {
     let pass = prompt('ingrese su contraseña')
 
     while (name === "" || user === "" || pass === "") {
-        alert('debe escribir su nombre, usuario y password, no puede quedar ningún campo en blanco')
+        alert('debe escribir su nombre, usuario y password, no puede quedar en blanco')
         name = prompt('ingrese su nombre')
         user = prompt('ingrese su usuario')
         pass = prompt('ingrese su contraseña')
@@ -51,18 +51,19 @@ function registro() {
 // funcion que confirma si el usuario corresponde con la contraseña
 function validar(user, pass) {
     for (const i of usuarios) {
+        
         if (user === i.usr && pass === i.pass) {
             return i;
-        } else {
-            return false;
-        }
+        } 
+        
+    return false    
     }
 }
 
 // login de usuario 
 function loginAdm(user, pass) {
     if (usuarios.length === 0) {
-        alert('no existen usuarios registrados volviendo al menú')
+        alert('no existen usuarios registrados cerrando aplicacion')
 
 
     } else {
@@ -83,7 +84,6 @@ function loginAdm(user, pass) {
 
             }
             alert('maximo de intentos superados')
-            return = false
 
 
 
@@ -92,15 +92,22 @@ function loginAdm(user, pass) {
     }
 }
 
-función modificadorUsuario (user) {
-    const pos = usuarios.indexof(user)
-    alert(`posicion: ${pos)`)
+
+
+function modificarNombre(user) {
+
+    const pos = usuarios.indexOf(user)
+    console.log(pos)
+
+    user[pos].name = prompt('escriba su nombre')
+}
+
 
 
 // menú
 
 function menu1() {
-p
+
     let opcion = parseInt(prompt('Bienvenido, por favor elija una opción: \n 1. registrar una cuenta \n 2. Iniciar sesión \n 3. cerrar'))
     if (opcion === 1) {
         // opcion 1 registrar cuenta
@@ -129,14 +136,16 @@ function menu2(usr) {
         let opcion = parseInt(prompt(`Bienvenido ${validado.name}, por favor elija una opción: \n 1. cambiar su nombre \n 2. cambiar nombre de usuario \n 3. cambiar contraseña \n 4. cerrar sesion`))
         if (opcion === 1) {
             // opcion 1 cambiar nombre
+            modificarNombre(validado)
 
         } else if (opcion === 2) {
             // opcion 2 cambiar usuario
-            modificadorUsuario(validadopo)
 
         } else if (opcion === 3) {
+            // opcion 3 cambiar contraseña
 
         } else if (opcion === 4) {
+            // opcion 4 cerrar sesion
             menu1()
         } else {
             alert('Elija una opcion correcta (1-4)')
@@ -147,21 +156,26 @@ function menu2(usr) {
 
 
 }
-// opcion 1 cambiar nombre
-// opcion 2 cambiar usuario
-// opcion 3 cambiar contraseña
-// opcion 4 cerrar sesion
 
 
 
-//orden del proceso
+// ORDEN DE FUNCIONAMIENTO
+
+
+//---------------captura de datos----------------
 menu1()
+//registro()
+
+//---------------procesamiento de los datos---------------
+
 validado = loginAdm()
+
 console.log(validado)
-menu2(validado)
-menu1()
 
 
+//---------------salida de los datos---------------
+
+menu2()
 
 
 
