@@ -45,25 +45,28 @@ function registro() {
     }
 
     alert("Gracias " + name + " no olvides tu usuario y contraseña" + "\n" + "Usuario: " + user + "\n" + "Password: " + pass)
-    menu1()
+    
 }
 
 // funcion que confirma si el usuario corresponde con la contraseña
 function validar(user, pass) {
     for (const i of usuarios) {
-        
+
         if (user === i.usr && pass === i.pass) {
             return i;
-        } 
-        
-    return false    
+        } else {
+            continue;
+        }
+
+
     }
+    return false
 }
 
 // login de usuario 
 function loginAdm(user, pass) {
     if (usuarios.length === 0) {
-        alert('no existen usuarios registrados cerrando aplicacion')
+        alert('No existen usuarios registrados cerrando aplicación')
 
 
     } else {
@@ -78,7 +81,7 @@ function loginAdm(user, pass) {
 
             } else if (intento > 0) {
 
-                alert('tienes ' + intento + ' intentos')
+                alert('¡usuario o clave erronea!, te quedan ' + intento + ' intentos')
 
                 continue
 
@@ -97,59 +100,83 @@ function loginAdm(user, pass) {
 function modificarNombre(user) {
 
     const pos = usuarios.indexOf(user)
-    console.log(pos)
 
-    user[pos].name = prompt('escriba su nombre')
+    user.name = prompt('escriba su nombre')
+
+    usuarios.splice(pos, 1, user)
+    alert(`Su nombre fue actualizado a ${user.name}, volviendo al menú`)
+    menu2(validado)
+
 }
+function modificarUser(user) {
 
+    const pos = usuarios.indexOf(user)
 
+    user.usr = prompt('Escriba su nuevo nombre de usuario')
 
-// menú
+    usuarios.splice(pos, 1, user)
+    alert(`Su usuario fue actualizado a ${user.usr}, cerrando sesión, ingrese nuevamente`)
+    
 
-function menu1() {
+}
+function modificarPass(user) {
 
-    let opcion = parseInt(prompt('Bienvenido, por favor elija una opción: \n 1. registrar una cuenta \n 2. Iniciar sesión \n 3. cerrar'))
-    if (opcion === 1) {
-        // opcion 1 registrar cuenta
-        registro()
-    } else if (opcion === 2) {
-        alert("ingresando al login")
-    } else if (opcion === 3) {
-        alert("cerrando aplicacion")
+    const pos = usuarios.indexOf(user)
 
-    } else {
-        alert('Debe elegir una opcion correcta')
-        menu1()
+    user.pass = prompt('Escriba una nueva contraseña')
+    passConfirm = prompt('repita su contraseña')
+
+    while (user.pass !== passConfirm) {
+        alert('su contraseña no coincide, favor escribirla nuevamente')
+        user.pass = prompt('Escriba una nueva contraseña')
+        passConfirm = prompt('repita su contraseña')
     }
+    usuarios.splice(pos, 1, user)
+    alert(`Su contraseña fue actualizada, cerrando sesión, ingrese nuevamente`)
+
+
 }
 
 
-// opcion 2 inciar sesion
 
 
-// menú 
+
+
+// menú 2
 function menu2(usr) {
     if (usr === false) {
         alert("acceso denegado")
     } else {
 
-        let opcion = parseInt(prompt(`Bienvenido ${validado.name}, por favor elija una opción: \n 1. cambiar su nombre \n 2. cambiar nombre de usuario \n 3. cambiar contraseña \n 4. cerrar sesion`))
+        let opcion = parseInt(prompt(`Bienvenido ${validado.name}, por favor elija una opción: \n 1. cambiar su nombre \n 2. cambiar nombre de usuario \n 3. cambiar contraseña \n 4. ver info de la cuenta \n 5. cerrar sesion`))
         if (opcion === 1) {
             // opcion 1 cambiar nombre
             modificarNombre(validado)
+            menu2(validado)
 
         } else if (opcion === 2) {
             // opcion 2 cambiar usuario
+            modificarUser(validado)
+
+
 
         } else if (opcion === 3) {
             // opcion 3 cambiar contraseña
+            modificarPass(validado)
 
         } else if (opcion === 4) {
-            // opcion 4 cerrar sesion
-            menu1()
+            // opcion 4 validar datos
+            alert(`informacion de la cuenta: \n nombre: ${validado.name} \n usuario: ${validado.usr} \n Password: ${validado.pass}`)
+            menu2(validado)
+            
+
+        } else if (opcion === 5) {
+            // opcion 5 cerrar sesion
+            alert('cerrando sesión, volviendo al menú principal')
+
         } else {
-            alert('Elija una opcion correcta (1-4)')
-            menu2()
+            alert('Elija una opcion correcta (1-5)')
+            menu2(validado)
         }
 
     }
@@ -160,22 +187,57 @@ function menu2(usr) {
 
 
 // ORDEN DE FUNCIONAMIENTO
+// ciclo para volver al menú principal
 
+let ciclo = true
 
 //---------------captura de datos----------------
-menu1()
-//registro()
+while (ciclo === true) {
+    let opcion = parseInt(prompt('Bienvenido, por favor elija una opción: \n 1. registrar una cuenta \n 2. Iniciar sesión \n 3. cerrar'))
+    if (opcion === 1) {
+        // opcion 1 registrar cuenta
+        registro()
+    } else if (opcion === 2) {
+        alert("ingresando al login")
+        validado = loginAdm()
+        menu2()
 
-//---------------procesamiento de los datos---------------
+    } else if (opcion === 3) {
+        alert("cerrando aplicacion")
+        ciclo = false
 
-validado = loginAdm()
+    } else {
+        alert('Debe elegir una opcion correcta')
+    }
 
-console.log(validado)
+    //---------------procesamiento de los datos---------------
+
+    // loginAdm()
 
 
-//---------------salida de los datos---------------
 
-menu2()
+    //---------------salida de los datos---------------
+    // menu2()
+    // modificarNombre()
+    // modificarUser()
+    // modificarpass()
+    // opcion 4 del menú 2
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
